@@ -57,6 +57,7 @@ const salesReducers = (state = initState, action) => {
         case 'setJob':
             let temp_job = state.salesOrder_job;
             temp_job[action.idx] = action.e.target.value;
+            console.log(temp_job)
             return {
                 ...state,
                 salesOrder_job : temp_job,

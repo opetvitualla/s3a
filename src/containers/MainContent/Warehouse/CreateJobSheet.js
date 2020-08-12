@@ -40,6 +40,7 @@ class CreateJobSheet extends Component {
         let url = Config.base_url + 'warehouse/submitJobSheet';
         let formdata = new FormData(e.target);
         formdata.append('so_id' ,jo_id );
+        formdata.append('quantity' ,this.props.create_js_data[0].quantity );
         let response = await axios.post(url , formdata);
         if (response.data.status == 'success') {
             Alertify.success(response.data.msg);
@@ -113,7 +114,6 @@ class CreateJobSheet extends Component {
                 js_number = parseInt(last_id[0].job_sheet_id)+1;
             }
 
-            console.log(create_js_data);
              cjs = {
                 date: Moment(create_js_data[0].job_date).format('MMMM DD YYYY'),
                 po: 'JOID'+create_js_data[0].sales_id.padStart(5, "0"),

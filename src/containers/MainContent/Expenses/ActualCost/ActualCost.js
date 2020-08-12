@@ -61,6 +61,7 @@ class ActualCost extends Component {
 
 
     GetRequestList = async (current_date) => {
+        console.log(current_date);
       this.setState({ loading: true, data: [], dateNow: current_date})
         let url = Config.base_url + 'expenses/getActualCost/'+current_date;
         const response = await axios.get(url);

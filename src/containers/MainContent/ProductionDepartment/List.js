@@ -128,7 +128,7 @@ class List extends Component {
         if (response.data.msg == 'success') {
 
             response.data.result.map((key) => {
-                if (key.production_dep_status === 0) {
+                if (key.production_dep_status == '0') {
                     groupBtn = [
                         {title: "Update to In-progress",icon: "ion-checkmark",color:"success", function: () => this.approvebtn(key.job_sheet_id)},
                         {title: "View",icon: "ion-eye",color:"info", function: () => this.toggleModal(key.job_sheet_id)},
@@ -142,21 +142,21 @@ class List extends Component {
                     ];
                 }
                 let completed = 0;
-                let num_to_complete = key.from_return == '1' ? key.num_of_prod_to_complete : key.max_approved_cap_with;
+                let num_to_complete = key.from_return == '1' ? key.num_of_prod_to_complete : key.quantity;
 
                 if(key.completed_qty != null){
                     completed = key.completed_qty;
                 }
                 let per = 0;
 
-                if(completed != 0 && key.max_approved_cap_with != 0){
-                    per = parseInt((parseInt(parseInt(completed)/parseInt(num_to_complete)))*100);
+                if(completed != 0 && key.quantity != 0){
+                    per = ((key.completed_qty / num_to_complete) * 100);
                 }
                 let x = {
                     js_no: "ID" + key.job_sheet_id.padStart(5, "0"),
                     js_name: key.job,
                     dispath_date: key.dispatch_date,
-                    no_to_complete:key.max_approved_cap_with,
+                    no_to_complete:key.quantity,
                     no_completed: key.completed_qty,
                     percentage: <ProgressBar now={per.toFixed(2)} label={`${per.toFixed(2)}%`} />,
                     status: this.Status(key.production_dep_status),

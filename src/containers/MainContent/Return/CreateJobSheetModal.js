@@ -39,6 +39,7 @@ class CreateJobSheetModal extends Component {
         let url = Config.base_url + 'returnapi/submitJobSheet';
         let formdata = new FormData(e.target);
         formdata.append('so_id' ,jo_id );
+        formdata.append('quantity' ,this.props.return_create_js_data[0].quantity );
         let response = await axios.post(url , formdata);
         if (response.data.status == 'success') {
             Alertify.success(response.data.msg);

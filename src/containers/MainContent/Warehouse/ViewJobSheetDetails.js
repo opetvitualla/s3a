@@ -112,10 +112,18 @@ class ViewJobSheetDetails extends Component {
         let job_name_title = '';
         const { job_order_job_sheet_data } = this.props;
         if (job_order_job_sheet_data.length) {
+            console.log(job_order_job_sheet_data);
             const m = job_order_job_sheet_data.map((key, idx) => {
                 let status = '';
+                let department_status = '';
                 job_name_title = key.job_order_name;
-                switch (key.printing_dep_status) {
+
+                if(key.department == '0'){
+                    department_status = key.printing_dep_status
+                }else{
+                    department_status = key.production_dep_status
+                }
+                switch (department_status) {
 
                     case '1':
                         status = 'In-Progress';
@@ -144,10 +152,10 @@ class ViewJobSheetDetails extends Component {
                 let total = 0;
                 let department = 'Production';
 
-                if(key.department == 0){
+                if(key.department == '0'){
                     department = 'Printing';
                     completed = key.dep_completed_qty ? key.dep_completed_qty : '0';
-                    num_to_complete = key.max_approved_laminate_with;
+                    num_to_complete = key.quantity;
                     delivered = key.dep_delivered_qty ? key.dep_delivered_qty : '0';
                     total = parseInt(completed) + parseInt(delivered);
                     work_in_prog = parseInt(num_to_complete - total);
@@ -159,7 +167,7 @@ class ViewJobSheetDetails extends Component {
 
                 }else{
                     completed = key.prod_completed_qty ? key.prod_completed_qty : '0';
-                    num_to_complete = key.max_approved_cap_with;
+                    num_to_complete = key.quantity;
                     delivered = key.prod_delivered_qty ? key.prod_delivered_qty : '0';
                     total = parseInt(completed) + parseInt(delivered);
                     work_in_prog = parseInt(num_to_complete - total);
@@ -230,7 +238,7 @@ class ViewJobSheetDetails extends Component {
 
                 <Modal size="lg" isOpen={this.state.modalOpenDeliver} toggle={this.toggleDel}>
                   <ModalHeader toggle={this.toggleDel}> Deliver</ModalHeader>
-                  <UpdateJobSheet js_id={this.state.js_id} updatejob={this.props.updatejob} refresh={this.props.refresh}/>
+                  <UpdateJobSheet js_id={this.state.js_id} updatejob={this.props.updatejob} toggleDel={this.toggleDel} refresh={this.props.refresh}/>
                 </Modal>
 
                 <Modal size="lg" isOpen={this.state.modalOpen} toggle={this.toggleModal}>

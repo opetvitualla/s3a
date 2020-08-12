@@ -116,8 +116,16 @@ class Return extends Component {
         if (return_job_order_job_sheet_data.length) {
             const m = return_job_order_job_sheet_data.map((key, idx) => {
                 let status = '';
+                let department_status = '';
                 job_name_title = key.job_order_name;
-                switch (key.printing_dep_status) {
+
+                if(key.department == '0'){
+                    department_status = key.printing_dep_status
+                }else{
+                    department_status = key.production_dep_status
+                }
+
+                switch (department_status) {
 
                     case '1':
                         status = 'In-Progress';
@@ -160,8 +168,6 @@ class Return extends Component {
                     delivered = key.prod_delivered_qty ? key.prod_delivered_qty : '0';
                     total = parseInt(completed) + parseInt(delivered);
                     work_in_prog = parseInt(num_to_complete - total);
-                    // console.log('max approved:'+key.max_approved_cap_with);
-                    // console.log('total:'+total);
                      if(total != 0 && key.max_approved_cap_with != 0){
                         percent = ((parseInt(total) / parseInt(num_to_complete)) * 100);
                     }

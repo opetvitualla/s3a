@@ -298,7 +298,7 @@ class UpdateJobSheet extends Component {
                                 </table>
 
                                 <ModalFooter>
-                                     <Button color="primary" className="btn btn-secondary waves-effect" onClick={this.toggleDel}>Cancel</Button>
+                                     <Button type="button" color="primary" className="btn btn-secondary waves-effect" onClick={this.props.toggleDel}>Cancel</Button>
                                      <Button type="submit" color="success" className="btn btn-secondary waves-effect">OK</Button>
                                 </ModalFooter>
                             </Form>

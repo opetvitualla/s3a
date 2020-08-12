@@ -107,12 +107,12 @@ class JobOrder extends Component {
                  }
 
                  let completed = 0;
-                 let num_to_complete = key.from_return == '1' ? key.num_of_prod_to_complete : key.max_approved_laminate_with;
+                 let num_to_complete = key.from_return == '1' ? key.num_of_prod_to_complete : key.quantity;
                  if(key.completed_qty != null){
                      completed = key.completed_qty;
                  }
                  let percent = 0;
-                 if(completed != 0 && key.max_approved_laminate_with != 0){
+                 if(completed != 0 && key.quantity != 0){
                     percent = ((key.completed_qty / num_to_complete) * 100);
                 }
 

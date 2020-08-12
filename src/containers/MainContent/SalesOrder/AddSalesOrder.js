@@ -209,8 +209,7 @@ class AddSalesOrder extends Component {
                                             Job
                                             {(idx > 0) ? <button onClick={() => this.Splice(idx)} type="button" class="addMoreClosebtn" aria-label="Close"><span aria-hidden="true">×</span></button> : null}
                                         </Label>
-                                        {console.log(this.props.salesOrder_job)}
-                                        <Input type="text" className="form-control" name="salesOrder_job[]" value={this.props.salesOrder_job[idx]} onChange={(e) => this.props.setJob(e , idx) } placeholder="Enter Job Name" />
+                                        <Input type="text" className="form-control" name="salesOrder_job[]" value={this.props.salesOrder_job[idx]} onChange={(e, idx) => this.props.setJob(e , idx) } placeholder="Enter Job Name" />
                                         <span id="err">{this.validator.message('Job Name', this.props.salesOrder_job[idx], 'required')}</span>
                                     </FormGroup>
                                 </Col>

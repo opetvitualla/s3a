@@ -194,38 +194,6 @@ class PurchaseOrder extends Component{
           this.setState({
             editSupplier : newValue
           })
-         // this.state.supplier_id[actionMeta]        = (newValue ? newValue.value : '');
-         // this.state.supplier_name[actionMeta]      = (newValue ? newValue.label : '');
-         //
-         // if(this.state.supplier_id[actionMeta]){
-         //
-         //    this.state.isDisable[actionMeta]       = false
-         //    await this.setState({isDisable: this.state.isDisable});
-         //
-         //    let temp_data =[];
-         //    let url = Config.base_url + '/api/viewRaw/' + newValue.value;
-         //    let response = await axios.post(url , '');
-         //
-         //    if (response.data) {
-         //       this.forceUpdate();
-         //       response.data.map((data , idx) => {
-         //          let Options = {
-         //            value : data.raw_id,
-         //            label : data.material_name
-         //          }
-         //          temp_data.push(Options);
-         //       });
-         //       await this.setState({OptionsRaw: temp_data});
-         //    }else{
-         //       alert('failed');
-         //    }
-         //
-         // }else{
-         //    this.state.isDisable[actionMeta] = true;
-         //    await this.setState({isDisable: this.state.isDisable, supplier_id: this.state.supplier_id});
-         //    this.validator.showMessages();
-         //    this.forceUpdate();
-         // }
 
 
       } // end handleSelectChange
@@ -251,8 +219,6 @@ class PurchaseOrder extends Component{
 
       checkPOstatus = (id , po_id) => {
          let groupBtn = [
-            // { title: "Approve",icon: "ion-checkmark",color:"primary", disabled : false,function: () => this.ApproveBtn(po_id)},
-            // { title: "Decline" ,icon: "ion-close",color:"secondary", disabled : false,function: () => this.DeclineModalToggle(po_id)},
             { title: "Edit" ,icon: "ion-edit",color:"info", disabled : false,function: () => this.EditPO(po_id)},
             { title: "View" ,icon: "ion-eye",color:"warning", disabled : false,function: () => this.viewPO(po_id)},
          ];

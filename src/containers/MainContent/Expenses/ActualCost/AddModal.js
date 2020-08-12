@@ -14,6 +14,7 @@ const AddModal = (props) => {
         let url = Config.base_url + 'expenses/Add/tbl_actual_cost';
         let formdata = new FormData(e.target);
         let response = await axios.post(url, formdata);
+
         if (response.data.status == 'success') {
             Alertify.success(response.data.msg);
             props.refresh()
@@ -22,7 +23,7 @@ const AddModal = (props) => {
             Alertify.error(response.data.msg);
         }
     }
-    
+
     return (
         <Modal isOpen={props.ACmodalOpen} toggle={() => props.toggle(3)}>
             <ModalHeader toggle={() => props.toggle()}>

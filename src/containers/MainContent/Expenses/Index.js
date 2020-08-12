@@ -41,18 +41,24 @@ class Index extends Component {
     }
 
     triggerChild(){
+        var current_date = Moment(this.state.monthOf.toLocaleDateString('en-US', DATE_OPTIONS)).format('Y-MM')
+
         return(
-            this.refs.first_child.GetRequestList(this.state.monthOf)
+            this.refs.first_child.GetRequestList(current_date)
         );
     }
     triggerLastChild(){
+        var current_date = Moment(this.state.monthOf.toLocaleDateString('en-US', DATE_OPTIONS)).format('Y-MM')
+
         return(
-            this.refs.last_child.triggerChild(this.state.monthOf)
+            this.refs.last_child.triggerChild(current_date)
         );
     }
     triggerSecondChild(){
+        var current_date = Moment(this.state.monthOf.toLocaleDateString('en-US', DATE_OPTIONS)).format('Y-MM')
+
         return(
-            this.refs.child.GetRequestList(this.state.monthOf)
+            this.refs.child.GetRequestList(current_date)
         );
     }
 
