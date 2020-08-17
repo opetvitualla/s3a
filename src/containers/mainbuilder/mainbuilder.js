@@ -44,6 +44,22 @@ import PrintingRequestList from '../MainContent/PrintingDepartment/RequestList';
 // Super Admin
 import SuperMonthlyInventory from '../SuperAdmin/MonthlyInventory/MonthlyInventory';
 import SuperPurchaseOrder from '../SuperAdmin/PurchaseOrder/PurchaseOrder';
+import SuperSalesOrder from '../SuperAdmin/SalesOrder/SalesOrder';
+import SuperWarehouse from '../SuperAdmin/Warehouse/Warehouse';
+import SuperPrintingDepartment from '../SuperAdmin/PrintingDepartment/Index';
+import SuperProductionDepartment from '../SuperAdmin/ProductionDepartment/Production';
+import SuperReturn from '../SuperAdmin/Return/Return';
+import SuperExpenses from '../SuperAdmin/Expenses/Index';
+import SuperCustomerReport from "../SuperAdmin/Reports/CustomerReport";
+import SuperRawMaterialReport from "../SuperAdmin/Reports/RawMaterialReport";
+import SuperReportExpenses from "../SuperAdmin/Reports/ReportExpenses";
+import SuperSalesReport from "../SuperAdmin/Reports/SalesReport";
+import SuperUser from "../SuperAdmin/Users/Users";
+import SuperCustomer from "../SuperAdmin/Customer/Container";
+import SupDailyInventory from '../SuperAdmin/Inventory/DailyInventory';
+import SupMonthlyInventory from '../SuperAdmin/Inventory/MonthlyInventory';
+import SupPurhaseOrder from '../SuperAdmin/PurchaseOrder/NewPurchaseOrder';
+
 
 class mainbuilder extends Component {
 
@@ -122,6 +138,24 @@ class mainbuilder extends Component {
                         <Route path="/dashboard" component={Dashboard} />
                         <Route path="/SuperMonthlyInventory" component={SuperMonthlyInventory} />
                         <Route path="/SuperPurchaseOrder" component={SuperPurchaseOrder} />
+                        <Route path="/SuperSalesOrder" component={SuperSalesOrder} />
+                        <Route path="/super-warehouse" component={SuperWarehouse} />
+                        <Route path="/super-printing-department" component={SuperPrintingDepartment} />
+                        <Route path="/super-production-department" component={SuperProductionDepartment} />
+                        <Route path="/super-return" component={SuperReturn} />
+                        <Route path="/super-expenses" component={SuperExpenses} />
+                        <Route path="/super-customer-report" component={SuperCustomerReport} />
+                        <Route path="/super-rawmaterial-report" component={SuperRawMaterialReport} />
+                        <Route path="/super-expenses-report" component={SuperReportExpenses} />
+                        <Route path="/super-sales-report" component={SuperSalesReport} />
+                        <Route path="/super-manage-user" component={SuperUser} />
+                        <Route path="/super-customer" component={SuperCustomer} />
+                        <Route path="/super-daily-inventory" component={SupDailyInventory} />
+                        <Route path="/super-monthly-inventory" component={SupMonthlyInventory} />
+                        <Route path="/super-purchase-order" component={SupPurhaseOrder} />
+
+
+
                         <Route path="/" component={Helper.isLoggedIn() ? Dashboard : Login} />
                     </Switch>
                 )
