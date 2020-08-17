@@ -1,9 +1,9 @@
 const config = {
-    // site_url: 'https://s3a.web2.ph/',
-    site_url: 'http://locahost:3000',
+    site_url: 'https://s3a.web2.ph/',
+    // site_url: 'http://locahost:3000',
     base_url: 'https://s3a.web2.ph/api/index.php/',
     isProduction: function () {
-        return false;// set false for development
+        return true;// set false for development
     },
 
     AlertConfig: {
