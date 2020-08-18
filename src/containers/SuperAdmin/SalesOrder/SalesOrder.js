@@ -9,7 +9,7 @@ import { MDBDataTable, MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import qs from "qs";
 import Alertify from 'alertifyjs';
 import SimpleReactValidator from 'simple-react-validator';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import "react-datepicker/dist/react-datepicker.css";
 import GroupButton from '../../CustomComponents/GroupButton';
 import AddSalesOrder from './AddSalesOrder';
@@ -45,21 +45,21 @@ class SalesOrder extends Component {
     DeleteSales = async (salesId) => {
         const me = this;
         Alertify.confirm("Are you sure you want to remove this record?",
-          async function(){
-              let response;
-              let formdata = {
-                  sales_id: salesId
-              };
-              let temp_data = [];
-              let url = Config.base_url + 'sales/archiveSalesOrder';
-              response = await axios.post(url, qs.stringify(formdata));
-              if (response.data.msg === "success") {
-                  me.GetSalesOrder();
-              }
-          },
-          function(){
+            async function () {
+                let response;
+                let formdata = {
+                    sales_id: salesId
+                };
+                let temp_data = [];
+                let url = Config.base_url + 'sales/archiveSalesOrder';
+                response = await axios.post(url, qs.stringify(formdata));
+                if (response.data.msg === "success") {
+                    me.GetSalesOrder();
+                }
+            },
+            function () {
                 // cancel
-          });
+            });
 
     }
 
@@ -69,79 +69,79 @@ class SalesOrder extends Component {
         let url = Config.base_url + 'sales/getSalesOrder';
         response = await axios.post(url, '');
         if (response.data.status == 'ok') {
-            const {list} = response.data;
+            const { list } = response.data;
 
             list.map((key, idx) => {
                 const process_data = this.getProcessData(key.sales_id);
                 process_data.then(prog => {
 
                     let groupBtn = [
-                        { title: "Edit", icon: "ion-edit", color: "info", function: () => this.getSalesData(key.sales_id , key.fk_customer_id) },
+                        { title: "Edit", icon: "ion-edit", color: "info", function: () => this.getSalesData(key.sales_id, key.fk_customer_id) },
                         { title: "Remove", icon: "ion-trash-a", color: "primary", function: () => this.DeleteSales(key.sales_id) }
                     ];
                     let x = {};
-                    if(prog.status === 'ok'){
+                    if (prog.status === 'ok') {
                         console.log(prog.data.wip)
                         x = {
                             salesID: "SOID" + key.sales_id.padStart(5, "0"),
                             job: key.description,
                             customer: key.company,
-                            dispatch:key.dispatch_date,
-                            wip : prog.data.wip,
-                            delivered : prog.data.delivered,
-                            total_completed : prog.data.completed,
+                            dispatch: key.dispatch_date,
+                            wip: prog.data.wip,
+                            delivered: prog.data.delivered,
+                            total_completed: prog.data.completed,
                             action: <GroupButton data={groupBtn} />
                         }
-                    }else{
+                    } else {
                         x = {
                             salesID: "SOID" + key.sales_id.padStart(5, "0"),
                             job: key.description,
                             customer: key.company,
-                            dispatch:key.dispatch_date,
-                            wip : '-',
-                            delivered : '-',
-                            total_completed :'-',
+                            dispatch: key.dispatch_date,
+                            wip: '-',
+                            delivered: '-',
+                            total_completed: '-',
                             action: <GroupButton data={groupBtn} />
                         }
                     }
 
-                temp_data.push(x);
+                    temp_data.push(x);
 
                 })
                 const me = this;
-                setTimeout(function(){
+                setTimeout(function () {
                     me.setState({ salesData: temp_data })
                 }, 1000);
             });
         }
     }
 
-    getProcessData = async(sales_id) => {
+    getProcessData = async (sales_id) => {
         let data = {};
         let status = [];
-        const process_datas = await axios.get(Config.base_url + 'sales/'+'getJobOrderProcess/' + sales_id);
-        const {result , msg} = process_datas.data;
-        if(msg === 'success'){
+        const process_datas = await axios.get(Config.base_url + 'sales/' + 'getJobOrderProcess/' + sales_id);
+        const { result, msg } = process_datas.data;
+        if (msg === 'success') {
             data = {
-                wip : result['work_in_progress'],
-                completed : result['completed'],
-                delivered : result['delivered']
+                wip: result['work_in_progress'],
+                completed: result['completed'],
+                delivered: result['delivered']
             };
-            status = {"status" : "ok" , 'data': data};
-        }else{
-            status = {"status" : "nodata"};
+            status = { "status": "ok", 'data': data };
+        } else {
+            status = { "status": "nodata" };
         }
 
         return status;
 
     }
 
-    getSalesData = async(sales_id , company_fk_id) => {
+    getSalesData = async (sales_id, company_fk_id) => {
         let url = Config.base_url + 'sales/getSO/' + sales_id;
         const res = await axios.get(url);
         if (res.data.status == 'ok') {
-            const {list} = res.data;
-            this.props.setSalesData(list ,sales_id , company_fk_id);
+            const { list } = res.data;
+            this.props.setSalesData(list, sales_id, company_fk_id);
             this.props.editModal();
         }
 
@@ -225,9 +225,9 @@ class SalesOrder extends Component {
                     </Col>
                 </Row>
 
-                <AddSalesOrder toggleModalSales={() => this.props.toggle()} updateTable = {() => this.GetSalesOrder()} />
+                <AddSalesOrder toggleModalSales={() => this.props.toggle()} updateTable={() => this.GetSalesOrder()} />
 
-                <EditSalesOrder updateTable = {() => this.GetSalesOrder()}/>
+                <EditSalesOrder updateTable={() => this.GetSalesOrder()} />
 
             </AUX>
         );
@@ -237,17 +237,17 @@ class SalesOrder extends Component {
 
 const mapStateToProps = state => {
     return {
-        modalOpen : state.salesReducers.modalOpen,
-        editSalesOrderId : state.salesReducers.editSalesOrderId
+        modalOpen: state.salesReducers.modalOpen,
+        editSalesOrderId: state.salesReducers.editSalesOrderId
     }
 };
 
 const mapActionToProps = dispatch => {
-    return{
-        toggle : () => dispatch({type : 'toggleModal'}),
-        setSalesData : (salesData , id , company_fk_id) => dispatch({type : 'setSalesData'  , salesData : salesData  , sales_id : id ,company_fk_id:company_fk_id }),
-        editModal : (salesData) => dispatch({type : 'editModal'}),
+    return {
+        toggle: () => dispatch({ type: 'toggleModal' }),
+        setSalesData: (salesData, id, company_fk_id) => dispatch({ type: 'setSalesData', salesData: salesData, sales_id: id, company_fk_id: company_fk_id }),
+        editModal: (salesData) => dispatch({ type: 'editModal' }),
     }
 }
 
-export default connect(mapStateToProps,mapActionToProps)(SalesOrder);
+export default connect(mapStateToProps, mapActionToProps)(SalesOrder);
